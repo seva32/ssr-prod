@@ -14,11 +14,11 @@ export default {
   },
 
   output: {
-    path: path.resolve("build"),
-    filename: "[name].[hash].js",
-    chunkFilename: "[name].[chunkhash].js",
-    publicPath: "/",
-    globalObject: "this",
+    path: path.resolve("public"),
+    filename: "bundle.js",
+    // chunkFilename: "[name].[chunkhash].js",
+    // publicPath: "/",
+    // globalObject: "this",
   },
 
   resolve: {

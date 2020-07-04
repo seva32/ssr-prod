@@ -1,3 +1,6 @@
+import { TOKEN_SECRET } from "../../src/utils/getKey/apiKeys";
+import getKey from "../../src/utils/getKey/getKey";
+
 export default {
-  secret: process.env.TOKEN_SECRET || "tokentopsecret",
+  secret: getKey(TOKEN_SECRET) || "tokentopsecret",
 };

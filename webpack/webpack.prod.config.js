@@ -3,9 +3,8 @@ import path from "path";
 import HTMLWebpackPlugin from "html-webpack-plugin";
 import HtmlWebpackPrerenderPlugin from "html-webpack-prerender-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import webpack from "webpack";
 import config from "./webpack.config.babel";
-
-// import devMode = process.env.NODE_ENV !== "production;
 
 export default {
   devtool: "source-map",
@@ -15,6 +14,17 @@ export default {
   output: config.output,
 
   mode: "production",
+
+  stats: {
+    colors: false,
+    hash: true,
+    timings: true,
+    assets: true,
+    chunks: true,
+    chunkModules: true,
+    modules: true,
+    children: true,
+  },
 
   resolve: config.resolve,
 
@@ -82,6 +92,11 @@ export default {
     new MiniCssExtractPlugin({
       filename: "[name].[hash].css",
       chunkFilename: "[id].[hash].css",
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
     }),
     ...config.plugins,
   ],

@@ -2,26 +2,36 @@ import path from "path";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 // import HTMLWebpackPlugin from "html-webpack-plugin";
 // import HtmlWebpackPrerenderPlugin from "html-webpack-prerender-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
+// import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import nodeExternals from "webpack-node-externals";
 import webpack from "webpack";
 import config from "./webpack.config.babel";
 
-const devMode = process.env.NODE_ENV !== "production";
+// if (!env || !env.MONGOOSE) {
+//   throw new Error(
+//     `You need to specify your tmdb api-key. You can do so by specifying
+//       --env.apiKey=<yourkey> in the command line. For example:
+//       $ npm run serve-dev  -- --env.apiKey=<yourkey>
+//       or
+//       $ npm run build-webpack -- --env.apiKey=<yourkey> && npm run serve-prod`
+//   );
+// }
 
-export default {
+export default (env) => ({
   devtool: "source-map",
 
   target: "node",
 
-  entry: {
-    app: path.resolve("src/App"),
-    rootReducer: path.resolve("src/reducers/index"),
-  },
+  entry: path.resolve("server/server.js"),
+  // {
+  // app: path.resolve("src/App"),
+  // rootReducer: path.resolve("src/reducers/index"),
+  // },
 
   output: {
-    ...config.output,
-    filename: "[name].server.js",
-    libraryTarget: "umd",
+    path: path.resolve("build"),
+    filename: "bundle.js",
+    libraryTarget: "commonjs2",
   },
 
   mode: "production",
@@ -33,6 +43,7 @@ export default {
     ...config.resolve,
   },
 
+  externals: [nodeExternals()],
   // externals: ["react-helmet-async"],
 
   module: {
@@ -72,15 +83,23 @@ export default {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: devMode ? "[name].css" : "[name].[hash].css",
-      chunkFilename: devMode ? "[id].css" : "[id].[hash].css",
+      filename: "[name].[hash].css",
+      chunkFilename: "[id].[hash].css",
     }),
-    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ["build"] }),
+    // new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ["build"] }),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: "'production'"
-      }
+        NODE_ENV: "'production'",
+      },
+      "process.env.MONGOOSE": JSON.stringify((env && env.MONGOOSE) || ""),
+      "process.env.PORT": JSON.stringify((env && env.PORT) || ""),
+      "process.env.TOKEN_SECRET": JSON.stringify(
+        (env && env.TOKEN_SECRET) || ""
+      ),
+      "process.env.REACT_APP_GOOGLE_ID": JSON.stringify(
+        (env && env.REACT_APP_GOOGLE_ID) || ""
+      ),
     }),
     ...config.plugins,
   ],
-};
+});

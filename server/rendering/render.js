@@ -15,7 +15,7 @@ import { Capture } from "react-loadable";
 import { HelmetProvider } from "react-helmet-async";
 import { ServerStyleSheet } from "styled-components";
 import { devMiddleware } from "../middleware/webpack";
-import manifest from "../../build/react-loadable-ssr-addon.json";
+import manifest from "../../public/react-loadable-ssr-addon.json";
 import App from "../../src/App";
 import rootReducer from "../../src/reducers";
 

@@ -25,37 +25,38 @@ const SignupFormUI = ({ error, signup, history }) => {
   // eslint-disable-next-line no-unused-vars
   const [showButton, toggleShow] = useState(true);
 
-  const renderGoogleAuth = () => (
-      ((showButton || error) && (
-        <GoogleLogin
-          onSuccess={(res) => {
-            if (res.Qt.Au && res.googleId) {
-              toggleShow(false);
-              signup(
-                {
-                  email: res.Qt.Au,
-                  password: res.googleId,
-                },
-                () => {
-                  history.push("/");
-                }
-              );
-            }
-          }}
-          onFailure={(_res) => (
-            <Message negative>
-              <Message.Header>
-                There was a problem trying to signup with Google
-              </Message.Header>
-              <p>Try again or use another method</p>
-            </Message>
-            )}
-          // eslint-disable-next-line max-len
-          clientId="337014600692-84c6cvbn4370f08b6cdp8jkc2ndjln84.apps.googleusercontent.com"
-        >
-          Singup
-        </GoogleLogin>
-      )) || null);
+  const renderGoogleAuth = () => ((showButton || error) && (
+  <GoogleLogin
+    onSuccess={(res) => {
+          if (res.Qt.Au && res.googleId) {
+            toggleShow(false);
+            signup(
+              {
+                email: res.Qt.Au,
+                password: res.googleId,
+              },
+              () => {
+                history.push("/");
+              }
+            );
+          }
+        }}
+    onFailure={(_res) => (
+      <Message negative>
+        <Message.Header>
+          There was a problem trying to signup with Google
+        </Message.Header>
+        <p>Try again or use another method</p>
+      </Message>
+        )}
+        // use REACT_APP_GOOGLE_ID
+        // eslint-disable-next-line max-len
+    clientId="337014600692-84c6cvbn4370f08b6cdp8jkc2ndjln84.apps.googleusercontent.com"
+  >
+    Singup
+  </GoogleLogin>
+    ))
+    || null;
   const formik = useFormik({
     initialValues: {
       password: "",

@@ -50,6 +50,7 @@ const SigninFormUI = ({ error, signin, history }) => {
         <p>Try again or use another method</p>
       </Message>
         )}
+        // use REACT_APP_GOOGLE_ID=
         // eslint-disable-next-line max-len
     clientId="337014600692-84c6cvbn4370f08b6cdp8jkc2ndjln84.apps.googleusercontent.com"
   >
