@@ -1,0 +1,80 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "modules": false }],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-react-jsx-source",
+    "@babel/plugin-proposal-function-bind",
+    "react-hot-loader/babel",
+    "@babel/plugin-proposal-object-rest-spread",
+    // "@babel/plugin-syntax-export-default-from",
+    [
+      "styled-components",
+      {
+        "ssr": true
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "test": [
+        "./webpack"
+      ],
+      "presets": [
+        [
+          "@babel/preset-env"
+        ]
+      ]
+    }
+  ]
+}
+
+// function isWebTarget(caller) {
+//   return Boolean(caller && caller.target === "web");
+// }
+
+// function isWebpack(caller) {
+//   return Boolean(caller && caller.name === "babel-loader");
+// }
+
+// module.exports = (api) => {
+//   const web = api.caller(isWebTarget);
+//   const webpack = api.caller(isWebpack);
+//   return {
+//     presets: [ ...
+//     };
+//   };
+
+// module.exports = function(api) {
+//   api.cache(true);
+
+//   const presets = [
+//     '@babel/preset-react'
+//   ];
+
+//   const plugins = [
+//     'react-loadable/babel',
+//   ];
+
+//   return {
+//     presets,
+//     plugins
+//   };
+// };
