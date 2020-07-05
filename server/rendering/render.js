@@ -21,11 +21,11 @@ import rootReducer from "../../src/reducers";
 
 function getTemplate() {
   if (process.env.NODE_ENV === "production") {
-    return fs.readFileSync(path.resolve("src/index.html"), "utf8");
+    return fs.readFileSync(path.resolve("src/app.html"), "utf8");
   }
 
   return devMiddleware.fileSystem.readFileSync(
-    path.resolve("src/index.html"),
+    path.resolve("src/app.html"),
     "utf8"
   );
 }
@@ -89,26 +89,29 @@ function render(req, res, preloadedState, routeData) {
         routeData
       )};</script></head>`
     )
-    .replace(
-      "</head>",
-      `${styles
-        .map((style) => `<link href="../../build/${style.file}" rel="stylesheet" />`)
-        .join("\n")}</head>`
-    )
+    // .replace(
+    //   "</head>",
+    //   `${styles
+    //     .map((style) => `<link href="build/${style.file}" rel="stylesheet" />`)
+    //     .join("\n")}</head>`
+    // )
     .replace(
       "</head>",
       `${stylesSC}</head>`
-    )
-    .replace(
-      "</body>",
-      `${scripts
-        .map(
-          (script) => `<script type="text/babel" src="../../build/${script.file}"></script>`
-        )
-        .join("\n")}</body>`
     );
+    // .replace(
+    //   "</body>",
+    //   `${scripts
+    //     .map(
+    //       (script) => `<script type="text/babel" src="build/${script.file}"></script>`
+    //     )
+    //     .join("\n")}</body>`
+    // );
 
+  console.log(context.status);
+  console.log(context.url);
   if (context.url) {
+    console.log("********** Context **********");
     res.redirect(context.status, context.url);
   } else {
     console.log("**********", html);

@@ -8,7 +8,7 @@ const devEnv = process.env.NODE_ENV !== "production";
 const devMiddleware = devEnv
   ? webpackDevMiddleware(compiler, {
     contentBase: "build",
-    index: ["index.html"],
+    index: false,
     serverSideRender: true,
     stats: { colors: true },
     noInfo: true,

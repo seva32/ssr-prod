@@ -34,7 +34,7 @@ const App = ({ ssrLocation, context }) => (
   <Router ssrLocation={ssrLocation} context={context}>
     <ErrorBoundary>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/home">
           <Home />
         </Route>
         <Route exact path="/signin" component={SigninFormUI} />
@@ -44,7 +44,7 @@ const App = ({ ssrLocation, context }) => (
         <Route path="/test" component={LoadableTest} />
         <Route path="/todos" component={LoadableTodos} />
         <Route path="/responsive" component={HomeResponsive} />
-        <RedirectWithStatus status={301} from="/home" to="/" />
+        <RedirectWithStatus status={301} from="/" to="/home" />
         <Route component={NotFound} />
       </Switch>
     </ErrorBoundary>

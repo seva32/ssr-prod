@@ -110,7 +110,7 @@ export default {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HTMLWebpackPlugin({
-      template: path.resolve("src/index.html"),
+      template: path.resolve("src/app.html"),
       minify: { collapseWhitespace: false },
     }),
     new HtmlWebpackPrerenderPlugin({ main: "#root" }),

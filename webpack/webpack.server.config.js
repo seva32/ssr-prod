@@ -29,8 +29,8 @@ export default (env) => ({
   // },
 
   output: {
-    path: path.resolve("build"),
-    filename: "bundle.js",
+    path: path.resolve("public"),
+    filename: "bundle.server.js",
     libraryTarget: "commonjs2",
   },
 

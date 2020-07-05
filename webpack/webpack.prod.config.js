@@ -85,7 +85,7 @@ export default {
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.resolve("src/index.html"),
+      template: path.resolve("src/app.html"),
       minify: { collapseWhitespace: true },
     }),
     new HtmlWebpackPrerenderPlugin({ main: "#root" }),
